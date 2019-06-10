@@ -1,0 +1,77 @@
+{
+    "desayuno":[
+        {
+                    "id": 1,
+                    "name": "Cafe Americano",
+                    "value": 500
+                },
+                {
+                    "id": 2,
+                    "name": "Cafe con leche",
+                    "value": 700
+                },
+                {
+                    "id": 3,
+                    "name": "Sandwich de jamón y queso",
+                    "value": 1000
+                },
+                {
+                    "id": 4,
+                    "name": "Jugo natural",
+                    "value": 700
+        }
+    ],
+    "almuerzocena": [{
+                    "id": 5,
+                    "name": "Hamburguesa Simple",
+                    "value": 1500
+                },
+                {
+                    "id": 6,
+                    "name": "Hamburguesa Doble",
+                    "value": 2500
+                },
+                {
+                
+                    "id": 7,
+                    "name": "Onion Rings",
+                    "value": 500
+                },
+                {
+                
+                    "id": 8,
+                    "name": "Agua 500ml",
+                    "value": 500
+                },
+                {
+                
+                    "id": 8,
+                    "name": "Agua 750ml",
+                    "value": 800
+                },
+                {
+                
+                    "id": 9,
+                    "name": "Gaseosa 500ml",
+                    "value": 700
+                },
+                {
+                
+                    "id": 10,
+                    "name": "Gaseosa 750ml",
+                    "value": 1000
+                },
+                {
+                
+                    "id": 11,
+                    "name": "Aregado queso",
+                    "value": 500
+                },
+                {
+                
+                    "id": 12,
+                    "name": "Agregado huevo",
+                    "value": 500
+    }]
+}
+

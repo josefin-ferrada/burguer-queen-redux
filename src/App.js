@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter , Route } from 'react-router-dom'
+import KitchenTemplate from "./Components/kitchenTemplate"
+import OrderForm from "./Components/orderForm"
+import Dashboard from "./Components/dashboard"
+import Lunch from "./Components/lunch"
+import BreakFast from "./Components/BreakFast"
+
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+    <React.Fragment>
+
+      <Route path="/" component={Dashboard}/>
+      <Route path="/cocina" component={KitchenTemplate}/>
+      <Route path="/mesero" component={OrderForm}/>
+      <Route path="/desayuno" component={BreakFast}/>
+      <Route path="/almuerzo" component={Lunch}/>
+    
+    
+    </React.Fragment>
+    </BrowserRouter>);
 }
 
 export default App;
