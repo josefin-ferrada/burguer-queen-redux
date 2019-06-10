@@ -1,6 +1,6 @@
-import setResume from './waiter';
+import waiter from './waiter';
 
 export default {
-  setResume
+  waiter
 };//juntar todas las acciones en un objeto 
 

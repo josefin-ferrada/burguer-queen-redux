@@ -4,7 +4,9 @@ import { Container, Row, Col } from 'react-grid-system';
 import { desayuno, almuerzocena} from "./menu.json";
 import React, { Component } from "react";
 import TextField from '@material-ui/core/TextField';
-import store from './../Store'
+import store from './../Store'; 
+import { setResume } from './../actions/waiter';
+import {connect} from 'react-redux'
 
 class Breakfast extends Component {
  
@@ -32,8 +34,8 @@ useStyles = {
   };
   
 
-  IncrementItem = (id, name, value, nameClient) => {
-    /* let exists = false;
+   IncrementItem = (id, name, value, nameClient) => {
+    /*let exists = false;
     let position = null;
     let actual = this.state;
     for (let i = 0; i < this.state.orden.length; i++) {
@@ -50,16 +52,21 @@ useStyles = {
       actual.orden[position].cantidad += 1;
       console.log("existe");
      
-    } */
+    } 
    
-    store.dispatch({ type: 'ADD_TO_RESUME',   name})
-    console.log(this.state);
+    store.dispatch({ type: 'SET_TO_RESUME',   name, id, value, nameClient})*/
+    
+    
   };
 
   DecreaseItem = () => {
     if (this.state.clicks > 0) {
       this.setState({ clicks: this.state.clicks - 1 });
     }
+  };
+  
+  updateInput = input => {
+    this.setState({ input });
   };
 
   render() {
@@ -69,7 +76,7 @@ useStyles = {
         <React.Fragment key={i}>
           <p >
             <Fab  size="small" color="primary" aria-label="Add" className={this.fab}>
-              <AddIcon  onClick={() => this.IncrementItem(single.id, single.name, single.value)} />
+              <AddIcon  onClick={() => this.props.resume(single.name,single.id,single.value)} />
             </Fab> {single.name}</p>
         </React.Fragment>
       );
@@ -79,7 +86,7 @@ useStyles = {
         <React.Fragment key={i}>
           <p>
             <Fab  size="small" color="primary" aria-label="Add" className={this.fab}>
-              <AddIcon  onClick={() => this.IncrementItem(single.id, single.name, single.value)} />
+              <AddIcon  onClick={() => this.props.resume(single.name,single.id,single.value)} />
             </Fab> {single.name}</p>
         </React.Fragment>
       );
@@ -96,8 +103,8 @@ useStyles = {
             className={this.textField}
             margin="normal"
             variant="outlined"
-            value={this.state.nameClient}
-            onChange={this.handleChange}
+            onChange={e => this.updateInput(e.target.value)}
+            value={this.state.input}
             
           />
           <h3>DESAYUNO</h3>
@@ -107,6 +114,7 @@ useStyles = {
           </Col>
           <Col debug>
           <h2>RESUMEN</h2>
+          <p>hola aqui debe ir el nombre del producto</p>
           </Col>
         </Row>
       </Container>
@@ -114,5 +122,21 @@ useStyles = {
     )
   }
 }
-export default Breakfast;
+
+ const mapStateToProps = (state)=>{
+  return {
+    ...state
+  };
+}
+const mapDispatchToProps = (dispatch) => {
+  console.log(store.getState())
+  return {
+    resume:  setResume(dispatch) ,
+    
+    
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Breakfast);
+
 
