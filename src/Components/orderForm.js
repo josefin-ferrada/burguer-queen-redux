@@ -131,7 +131,7 @@ useStyles = {
 const mapDispatchToProps = (dispatch) => {
   console.log(store.getState())
   return {
-    resume:  setResume(dispatch) ,
+    resume:  setResume(dispatch) 
     
     
   }

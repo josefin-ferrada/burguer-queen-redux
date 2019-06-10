@@ -4,6 +4,7 @@ import { SET_TO_RESUME } from './actionTypes'
      dispatch({
         type: SET_TO_RESUME,
         order : {
+            
             nameUnit: name,
             identify : id,
             price: value,

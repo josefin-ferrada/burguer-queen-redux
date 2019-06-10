@@ -14,10 +14,8 @@ export default (
       ...state,//pemite copiar estado anterior y cuando le ponga coma sobreescribo el estado anterior
               //sin modificar el estado anterior a mano
       date: new Date(),
-      id: "",
-      cant: "",
-      name: "",
-      value: "",
+      order: action.order,
+      
       
         
       }
