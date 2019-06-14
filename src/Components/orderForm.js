@@ -136,8 +136,8 @@ useStyles = {
           </Col>
           <Col debug>
           <h2>RESUMEN</h2>
-          { this.props.menus.map((order,i) =>(<React.Fragment>
-        <Container fluid key={i} style={{ lineHeight: '32px' }}>
+          { this.props.menus.map((order,i) =>(<React.Fragment key={i}>
+        <Container fluid  style={{ lineHeight: '32px' }}>
           <Row debug>
           <Col debug md={2}><p>{order.identify}</p></Col>
           <Col debug> 
@@ -146,8 +146,8 @@ useStyles = {
               {order.nameUnit}</p>
             </Col>
             <Col debug>
-              <p>${order.price} <IconButton aria-label="Delete" >
-          <DeleteIcon fontSize="small"  onClick={() => this.props.delete(order.id)}/>
+              <p>${order.price} <IconButton aria-label="Delete" onClick={() => this.props.delete(order.id)} >
+          <DeleteIcon fontSize="small"  />
         </IconButton></p>
             </Col>
             

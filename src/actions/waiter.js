@@ -18,6 +18,8 @@ import store from './../Store';
  export const deleteResume = dispatch => (id) =>{
      dispatch({
          type: DELETE_RESUME,
-         id: id
+         payload: {
+             id
+         }
      })
  }
