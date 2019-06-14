@@ -4,9 +4,11 @@ import { Container, Row, Col } from 'react-grid-system';
 import { desayuno, almuerzocena} from "./menu.json";
 import React, { Component } from "react";
 import TextField from '@material-ui/core/TextField';
-import store from './../Store'; 
-import { setResume } from './../actions/waiter';
-import {connect} from 'react-redux'
+import { setResume, deleteResume } from './../actions/waiter';
+import {connect} from 'react-redux';
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
 
 class Breakfast extends Component {
  
@@ -26,16 +28,20 @@ useStyles = {
       marginLeft: "10px",
       marginRight: "10px",
     },
+    margin: {
+      margin: "10px",
+    },
   };
   
   state = {
-    orden: [],
-    nameClient: ""
+    
+    nameClient: "",
+    
   };
   
 
-   IncrementItem = (id, name, value, nameClient) => {
-    /*let exists = false;
+   /*IncrementItem = (id, name, value, nameClient) => {
+    let exists = false;
     let position = null;
     let actual = this.state;
     for (let i = 0; i < this.state.orden.length; i++) {
@@ -54,17 +60,10 @@ useStyles = {
      
     } 
    
-    store.dispatch({ type: 'SET_TO_RESUME',   name, id, value, nameClient})*/
-    
-    
-  };
-
-  DecreaseItem = () => {
-    if (this.state.clicks > 0) {
-      this.setState({ clicks: this.state.clicks - 1 });
-    }
-  };
+    store.dispatch({ type: 'SET_TO_RESUME',   name, id, value, nameClient})
   
+  };*/
+
   updateInput = input => {
     this.setState({ input });
   };
@@ -73,24 +72,46 @@ useStyles = {
     
     const menu = desayuno.map((single, i) => {
       return (
-        <React.Fragment key={i}>
-          <p >
-            <Fab  size="small" color="primary" aria-label="Add" className={this.fab}>
-              <AddIcon  onClick={() => this.props.resume(single.name,single.id,single.value)} />
-            </Fab> {single.name}</p>
-        </React.Fragment>
+      <React.Fragment key={i}>
+        <Container fluid style={{ lineHeight: '32px' }}>
+          <Row debug>
+            <Col debug> 
+              <p>
+              <Fab  size="small" color="primary" aria-label="Add" className={this.fab}>
+                  <AddIcon  onClick={() => this.props.resume(single.name,single.id,single.value)} />
+              </Fab> 
+              {single.name}</p>
+            </Col>
+            <Col debug>
+              <p>${single.value}</p>
+            </Col>
+          </Row>
+        </Container>
+      </React.Fragment>
       );
     })
     const menuAlm = almuerzocena.map((single, i) => {
       return (
-        <React.Fragment key={i}>
-          <p>
-            <Fab  size="small" color="primary" aria-label="Add" className={this.fab}>
-              <AddIcon  onClick={() => this.props.resume(single.name,single.id,single.value)} />
-            </Fab> {single.name}</p>
-        </React.Fragment>
+      <React.Fragment key={i}>
+        <Container fluid style={{ lineHeight: '32px' }}>
+          <Row debug>
+            <Col debug> 
+              <p>
+              <Fab  size="small" color="primary" aria-label="Add" className={this.fab}>
+                  <AddIcon  onClick={() => this.props.resume(single.name,single.id,single.value)} />
+              </Fab> 
+              {single.name}</p>
+            </Col>
+            <Col debug>
+              <p>${single.value}</p>
+            </Col>
+          </Row>
+        </Container>
+      </React.Fragment>
       );
     })
+
+    
     
     return (
       <Container fluid style={{ lineHeight: '32px' }}>
@@ -105,6 +126,7 @@ useStyles = {
             variant="outlined"
             onChange={e => this.updateInput(e.target.value)}
             value={this.state.input}
+            ref={(input) => this.getTitle = input}
             
           />
           <h3>DESAYUNO</h3>
@@ -114,7 +136,25 @@ useStyles = {
           </Col>
           <Col debug>
           <h2>RESUMEN</h2>
-          <p>hola aqui debe ir el nombre del producto</p>
+          { this.props.menus.map((order,i) =>(<React.Fragment>
+        <Container fluid key={i} style={{ lineHeight: '32px' }}>
+          <Row debug>
+          <Col debug md={2}><p>{order.identify}</p></Col>
+          <Col debug> 
+              <p>
+              
+              {order.nameUnit}</p>
+            </Col>
+            <Col debug>
+              <p>${order.price} <IconButton aria-label="Delete" >
+          <DeleteIcon fontSize="small"  onClick={() => this.props.delete(order.id)}/>
+        </IconButton></p>
+            </Col>
+            
+          </Row>
+        </Container>
+      </React.Fragment>))} 
+          <Button color="primary"  variant="contained" >Enviar a cocina</Button>
           </Col>
         </Row>
       </Container>
@@ -125,13 +165,14 @@ useStyles = {
 
  const mapStateToProps = (state)=>{
   return {
-    ...state
+    menus: state.waiter.order,
   };
 }
 const mapDispatchToProps = (dispatch) => {
-  console.log(store.getState())
+  
   return {
-    resume:  setResume(dispatch) 
+    resume:  setResume(dispatch),
+    delete: deleteResume(dispatch)
     
     
   }

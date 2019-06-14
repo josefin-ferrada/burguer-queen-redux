@@ -1,25 +1,26 @@
-import { SET_TO_RESUME } from  "../actions/actionTypes";
+import { SET_TO_RESUME, DELETE_RESUME } from  "../actions/actionTypes";
+
 
 export default (
-  state = {//estado inicial o default cuando el usuario no pone los parametros
-    id: "defecto",
-    name: "defecto",
-    value: 0
+  state = {
+    order: []
   },
   action//viene de action file
 ) => {
   switch(action.type){
+
     case SET_TO_RESUME:
       return {
-      ...state,//pemite copiar estado anterior y cuando le ponga coma sobreescribo el estado anterior
-              //sin modificar el estado anterior a mano
-      date: new Date(),
-      order: action.order,
-      
-      
-        
+        ...state,
+        order: state.order.concat([action.payload])
       }
-    
+      case DELETE_RESUME:
+        return {
+          ...state,
+        order: state.order.filter((order) => order.id !== action.id) /* state.order.filter((order) => order.id !== action.id) */
+        
+        }
+
     default: return state;//siempre poner default 
   }
 }

@@ -1,1 +1,2 @@
 export const SET_TO_RESUME = "SET_TO_RESUME";
+export const DELETE_RESUME = "DELETE_RESUME"
